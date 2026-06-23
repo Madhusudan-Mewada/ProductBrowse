@@ -17,7 +17,7 @@ interface Pagination {
 }
 
 // Use env var in production, fallback to relative (proxied) for local dev
-const API_BASE = (import.meta.env.VITE_API_URL as string) || ''
+const API_BASE = (import.meta.env.VITE_BE_URL as string) || ''
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
@@ -33,6 +33,7 @@ export default function App() {
 
   // ── Fetch categories once ──────────────────────────────────────────────────
   useEffect(() => {
+    console.log('VITE_BE_URL is:', import.meta.env.VITE_BE_URL)
     fetch(`${API_BASE}/api/products/categories`)
       .then((r) => r.json())
       .then((d) => setCategories(d.categories))
